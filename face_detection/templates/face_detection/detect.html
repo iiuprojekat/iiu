@@ -1,0 +1,71 @@
+{% include "face_detection/main.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url "homepage" %}">Welcome, {{request.user}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href={% url "homepage" %}>Home <span class="sr-only"></span></a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url "detect" %}">Detect <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "logout" %}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    <div class="container h-100">
+		<div class="d-flex justify-content-left h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title">Upload an image</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+
+					<form method="POST" enctype="multipart/form-data" action="">
+                        {% csrf_token %}
+						<div class="input-group mb-3">
+							{{ form.description }}
+						</div>
+						<div class="input-group mb-2">
+							{{ form.document }}
+						</div>
+
+				   		<div class="d-flex justify-content-center mt-3 login_container">
+				 			<input class="btn login_btn" type="submit" value="Detect">
+				   		</div>
+					</form>
+				</div>
+			</div>
+            <div class="imagediv">
+            {% if post %}
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="{{ post.document.url }}" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">File uploaded at: <a href="{{ post.document.url }}">{{ post.document }}</p>
+                  </div>
+                </div>
+                  {% endif %}
+            </div>
+		</div>
+	</div>
+
+    <script>
+
+        const form_fields = document.getElementsByTagName('input');
+        form_fields[1].placeholder='Description..';
+		form_fields[2].placeholder='Upload image..';
+
+		for (const field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+	</script>
+
+{% endblock %}
+

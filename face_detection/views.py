@@ -1,13 +1,16 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, ImageUploadForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
+from .opencv_img import opencv_dface
+
+
 @csrf_protect
 def loginuser(request):
     if request.user.is_authenticated:
@@ -58,3 +61,20 @@ def register(request):
 def homepage(request):
     context = {}
     return render(request, 'face_detection/homepage.html', context)
+
+
+@csrf_protect
+@login_required(login_url='login')
+def detect(request):
+    if request.method == 'POST':
+        form = ImageUploadForm( request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            imageURL = settings.MEDIA_URL + form.instance.document.name
+            opencv_dface(settings.MEDIA_ROOT_URL + imageURL)
+
+            return render(request, 'face_detection/detect.html', {'form': form, 'post': post})
+    else:
+        form = ImageUploadForm()
+    return render(request, 'face_detection/detect.html', {'form': form})
