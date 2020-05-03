@@ -67,7 +67,7 @@ def homepage(request):
 @login_required(login_url='login')
 def detect(request):
     if request.method == 'POST':
-        form = ImageUploadForm( request.POST, request.FILES)
+        form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()

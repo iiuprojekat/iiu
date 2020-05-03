@@ -1,4 +1,5 @@
 {% include "face_detection/main.html" %}
+{% load static %}
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="{% url "homepage" %}">Welcome, {{request.user}}</a>
@@ -19,4 +20,38 @@
     </ul>
   </div>
 </nav>
+
+   <br>
+    <div class="container">
+        <div class="w3-row">
+            <div class="w3-col m8">
+                <div id="mywebcam"></div>
+                <p>
+                    <button onclick="takescreenshot()" class="w3-button w3-blue">Take snapshot</button>
+                </p>
+            </div>
+            <div class="w3-col m4">
+                <div id= "results">Your captured image here:</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "js/webcam.min.js" %}"></script>
+    <script>
+        Webcam.set({
+            width: 600,
+            height: 400,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+
+        Webcam.attach('#mywebcam');
+
+        function takescreenshot(){
+            Webcam.snap(function(data_url){
+                document.getElementById('results').innerHTML = "<h2> Here is your image: </h2><img width='300' src='"+data_url+"'>";
+            })
+        }
+    </script>
+    <br>
 {% endblock %}
