@@ -69,7 +69,9 @@ def detect(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
+
             post = form.save(commit=False)
+            post.user = request.user
             post.save()
             imageURL = settings.MEDIA_URL + form.instance.document.name
             opencv_dface(settings.MEDIA_ROOT_URL + imageURL)
