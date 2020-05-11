@@ -2,18 +2,18 @@ body, html{
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #F4F0CB;
+    background: #FBF7F4;
 }
 p{
     padding-left: 10%;
     padding-top: 5%;
-    color: #A29574;
+    color: #D0B3AD;
 }
 .user_card {
     width: 350px;
     margin-top: auto;
     margin-bottom: auto;
-    background: #DED29E;
+    background: #A9CCC8;
     position: relative;
     display: flex;
     justify-content: center;
@@ -31,12 +31,12 @@ p{
 }
 
 #form-title{
-    color: #A29574;
+    color: #49818E;
 }
 
 .login_btn {
     width: 100%;
-    background: #B7C68B;
+    background: #D0B3AD;
     color: white;
 }
 .login_btn:focus {
@@ -72,7 +72,6 @@ p{
     margin-top : 100px;
 }
 .p #txt_face{
-    font-size: 35px;
-    color: #A29574;
-
+    font-size: 50px;
+    color: #49818E;
 }
