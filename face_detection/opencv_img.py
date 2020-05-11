@@ -4,6 +4,7 @@ import cv2
 
 
 def opencv_dface(path):
+    detected_faces = 0
     img = cv2.imread(path, 1)
 
     if type(img) is np.ndarray:
@@ -14,7 +15,7 @@ def opencv_dface(path):
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
+        detected_faces = len(faces)
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
             roi_gray = gray[y:y + h, x:x + w]
@@ -25,3 +26,5 @@ def opencv_dface(path):
     else:
         print('ERROR')
         print(path)
+
+    return detected_faces
