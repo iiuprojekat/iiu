@@ -12,7 +12,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url="login/")),
     path('homepage/', homepage, name="homepage"),
     path('face/', face, name="face"),
-    url(r'^detect/$', detect, name="detect"),
+    url(r'^upload/$', detect, name="detect"),
     url(r'^$', homepage),
     url(r'^detection$', detection),
     url(r'^detectionVideo$', detectionVideo),
