@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^upload/$', detect, name="detect"),
     url(r'^$', homepage),
     url(r'^detection$', detection),
+
     url(r'^detectionVideo$', detectionVideo),
 ]
 

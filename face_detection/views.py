@@ -110,7 +110,7 @@ def detection(request):
             cv2.rectangle(img,(x,y),(x+w,y+h), (0,255,0), 2)
 
         cv2.imshow("Face",img)
-        if(cv2.waitKey(1) == ord('q')):
+        if (cv2.waitKey(1) == ord('q')):
             img_counter = len(DetectionModel.objects.filter(file_type = 'IMAGE')) + 1
             img_name = f"image{format(img_counter)}.png"
             os.chdir(r"./files/images")
@@ -124,6 +124,13 @@ def detection(request):
             cam.release()
             cv2.destroyAllWindows()
             return redirect('/face')
+        elif(cv2.waitKey(1) == ord('w')):
+            cam.release()
+            cv2.destroyAllWindows()
+            return redirect('/face')
+
+
+
         # elif(cv2.waitKey(1) == ord('esc')):
         #     break
 
