@@ -13,7 +13,7 @@
 
     {% block content %}
 
-
+    <body style="background: white">
     <div class="container h-100">
     <br>
     <h2>Previous uploads of user</h2>
@@ -53,19 +53,16 @@
 						</div>
 
 				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn login_btn" type="submit" value="Detect">
+				 			<input class="btn login_btn" style="background: #D0B3AD ;color:#ffffff" type="submit" value="Detect">
 				   		</div>
 					</form>
 				</div>
 			</div>
             <div class="imagediv">
             {% if post %}
-                <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="{{ post.document.url }}" alt="Card image cap">
-                  <div class="card-body">
-                      <p class="card-text">File uploaded at: <a href="{{ post.document.url }}"></a>{{ post.document }}</p>
-                  </div>
-                </div>
+
+                <img src="{{ post.document.url }}" class="img-fluid" alt="Responsive image">
+                
                   {% endif %}
             </div>
 		</div>
@@ -73,7 +70,7 @@
    <br>
 
 	</div>
-
+    </body>
     <script>
 
         const form_fields = document.getElementsByTagName('input');

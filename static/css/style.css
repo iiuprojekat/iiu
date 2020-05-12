@@ -1,14 +1,21 @@
-body, html{
+body{
     margin: 0;
     padding: 0;
     height: 100%;
     background: #FBF7F4;
+}
+html{
+   margin: 0;
+    padding: 0;
+    height: 100%;
+    background: white;
 }
 p{
     padding-left: 10%;
     padding-top: 5%;
     color: #D0B3AD;
 }
+
 .user_card {
     width: 350px;
     margin-top: auto;
@@ -47,7 +54,7 @@ p{
     padding: 0 2rem;
 }
 .input-group-text {
-    background: #f7ba5b;
+    background: #49818E;
     color: white;
     border: 0;
     border-radius: 0.25rem 0 0 0.25rem;

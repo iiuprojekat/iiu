@@ -1,13 +1,14 @@
 {% include 'face_detection/base.html' %}
 {% block content %}
-    <p class="txt_face" style="font-size: 35px; color: #A9CCC8;">Take a photo: </p>
+    <body style="background: white">
+    <p class="txt_face" style="font-size: 35px; color: #49818E;">Take a photo: </p>
     <small class="txt_face" style="margin-left: 35px;font-size: 15px; color: #A9CCC8;">Press  <b>"q"</b>  to take photo </small>
     <small class="txt_face" style="font-size: 15px; color: #A9CCC8;"> or press and hold <b>"w"</b> to exit. </small>
     <a href="/detection" class="btn btn-info" role="button" style="margin-left: 30px; background-color: #A9CCC8;border: white;">Capture</a>
 {#    <a href="/close" class="btn btn-info" role="button" style="margin-left: 254px; background-color: #A9CCC8;border: white;">Close</a>#}
-    <p class="txt_face" style="font-size: 35px; color: #A9CCC8;">Capture a video: </p>
+    <p class="txt_face" style="font-size: 35px; color: #49818E;">Capture a video: </p>
      <small class="txt_face" style="margin-left: 210px;font-size: 15px; color: #A9CCC8;">Press <b>"q"</b> to stop recording. </small>
 
     <a href="/detectionVideo" class="btn btn-info" role="button" style="margin-left: 30px; background-color: #A9CCC8; border: white;">Capture</a>
-
+    </body>
 {% endblock content %}
