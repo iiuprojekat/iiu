@@ -7,12 +7,12 @@ import django.contrib.auth
 
 from iot_project import settings
 
-
+#model koji će se koristiti za upload slika
 class ImageModel(models.Model):
-    description = models.CharField(max_length=255, blank=True)
-    document = models.ImageField(upload_to='images/%Y/%m/%d')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(django.contrib.auth.get_user_model(), null=True, on_delete= models.CASCADE)
+    description = models.CharField(max_length=255, blank=True) #opis modela
+    document = models.ImageField(upload_to='images/%Y/%m/%d') #putanja na kojoj ce se cuvati slika u projektu
+    uploaded_at = models.DateTimeField(auto_now_add=True) #datum i vreme upload-a
+    user = models.ForeignKey(django.contrib.auth.get_user_model(), null=True, on_delete= models.CASCADE) #foregin key koji povezuje sliku sa korisnikom koji ju je postavio
 
 FILE_TYPES = (('IMAGE','IMAGE'),('VIDEO','VIDEO'))
 class DetectionModel(models.Model):
