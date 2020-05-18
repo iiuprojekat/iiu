@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .opencv_img import opencv_dface
+from .filters import DetectionFilter, ImageFilter
 
 #dekorator koji se koristi ukoliko postoji POST metoda
 @csrf_protect
@@ -60,17 +61,23 @@ def register(request): #funkcija koja omogućava korisniku da se registruje
         context = {'form': form}
         return render(request, 'face_detection/register.html', context) #renderovanje stranice za registrovanje
 
+
 #dekorator koji omogućava da pristup početnoj strani bude dozoljen samo ulogovanim korisnicima
 @login_required(login_url='login')
 def homepage(request): #funkacija koja vraća početnu stranu
     detections = DetectionModel.objects.filter(user=request.user).order_by('-date', '-time') #kupljenje podataka koji će se prikazivati na strani
-    return render(request, 'face_detection/homepage.html', {'detections': detections}) #renderovanje početne strane
+    my_filter = DetectionFilter(request.GET, queryset=detections)
+    detections = my_filter.qs
+    context = {'my_filter': my_filter, 'detections': detections}
+    return render(request, 'face_detection/homepage.html', context) #renderovanje početne strane
 
 
 @csrf_protect #dekorator koji se koristi ukoliko postoji POST metoda
 @login_required(login_url='login') #dekorator koji omogućava da pristup početnoj strani bude dozoljen samo ulogovanim korisnicima
 def detect(request): #detektovanje lica na upload-ovanim slikama
     uploads = ImageModel.objects.filter(user=request.user).order_by('-uploaded_at') #uzimanje podataka o prethodno uploadovanim slikama
+    my_filter = ImageFilter(request.GET, queryset=uploads)
+    uploads = my_filter.qs
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES) #kreiranje ImageUploadForm forme
         if form.is_valid(): #validacija forme
@@ -86,10 +93,10 @@ def detect(request): #detektovanje lica na upload-ovanim slikama
                                size=f"{round(os.stat(file).st_size / 1024, 3)}KB",
                                user=request.user) #čuvanje uploadovane slike u DecetionModel modelu
             d.save()
-            return render(request, 'face_detection/detect.html', {'form': form, 'post': post, 'uploads': uploads}) #renderovanje detect strane
+            return render(request, 'face_detection/detect.html', {'form': form, 'post': post, 'uploads': uploads, 'my_filter':my_filter}) #renderovanje detect strane
     else:
         form = ImageUploadForm() #kreiranje ImageUploadForm forme koja će se prikazivati na detect strani
-    return render(request, 'face_detection/detect.html', {'form': form, 'uploads': uploads}) #renderovanje detect strane
+    return render(request, 'face_detection/detect.html', {'form': form, 'uploads': uploads, 'my_filter':my_filter}) #renderovanje detect strane
 
 
 @login_required(login_url='login')
