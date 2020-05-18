@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import ImageModel
 
-# forma koja nasleđuje UserCreationForm koja je default forma za kreiranje korisnika u Djangu
+# forma koja će se koristiti za registraciju novih korisnika
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User #forma je kreirana po modelu User
