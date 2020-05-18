@@ -18,7 +18,7 @@
     <br>
     <h2>Previous uploads of user</h2>
    <br>
-    <form method="GET">
+    <form method="GET" class="det">
       {{my_filter.form}}
         <br>
       <button type="submit" class="btn btn-primary" style="background: #D0B3AD ;color:#ffffff">Search</button>
@@ -80,8 +80,12 @@
     <script>
 
         const form_fields = document.getElementsByTagName('input');
-        form_fields[1].placeholder='Description..';
-		form_fields[2].placeholder='Upload image..';
+        form_fields[0].placeholder='Description';
+
+        form_fields[1].placeholder='mm/dd/yyyy';
+		form_fields[2].placeholder='mm/dd/yyyy';
+        form_fields[3].placeholder='Description..';
+		form_fields[4].placeholder='Upload image..';
 
 		for (const field in form_fields){
 			form_fields[field].className += ' form-control'
